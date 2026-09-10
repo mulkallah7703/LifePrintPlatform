@@ -11,6 +11,7 @@ import {
   PhoneIcon,
   PillIcon,
 } from "@/components/icons";
+import { Ltr } from "@/components/ltr";
 import { Sheet } from "@/components/overlays";
 import { useToast } from "@/components/toast";
 import { demoPatient } from "@/lib/patient";
@@ -43,11 +44,15 @@ export default function ProfilePage() {
           </div>
           <div className="info-row">
             <span className="label">العمر</span>
-            <span className="value">{patient.age} سنة</span>
+            <span className="value">
+              <Ltr>{patient.age}</Ltr> سنة
+            </span>
           </div>
           <div className="info-row">
             <span className="label">رقم الهوية</span>
-            <span className="value">{patient.nationalId}</span>
+            <span className="value">
+              <Ltr>{patient.nationalId}</Ltr>
+            </span>
           </div>
         </section>
 
@@ -73,7 +78,9 @@ export default function ProfilePage() {
           {patient.chronicConditions.map((item) => (
             <div key={item.id} className="soft-row">
               <div className="ar">{item.nameAr}</div>
-              <div className="en">{item.nameEn}</div>
+              <div className="en">
+                <Ltr>{item.nameEn}</Ltr>
+              </div>
             </div>
           ))}
         </section>
@@ -92,24 +99,25 @@ export default function ProfilePage() {
                 {item.nameAr} {item.doseAr}
               </div>
               <div className="en">
-                {item.nameEn} — {item.doseEn}
+                <Ltr>
+                  {item.nameEn} — {item.doseEn}
+                </Ltr>
               </div>
             </div>
           ))}
         </section>
       </div>
 
-      <div className="px-0 pb-0">
+      <div className="px-4 pb-1">
         <button
           type="button"
-          className="flex h-[54px] w-full items-center justify-center gap-2 rounded-none bg-navy text-[15px] font-semibold text-white"
+          className="navy-btn mb-3"
           onClick={() => setContactsOpen(true)}
         >
           <span>جهات الاتصال للطوارئ</span>
-          <span className="opacity-80">‹</span>
         </button>
-        <BottomNav variant="light" />
       </div>
+      <BottomNav variant="light" />
 
       <Sheet
         open={contactsOpen}

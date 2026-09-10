@@ -26,7 +26,7 @@ function StatusBar({ dark }: { dark: boolean }) {
   }, []);
 
   return (
-    <div className={`status-bar ${dark ? "is-dark" : ""}`}>
+    <div dir="ltr" className={`status-bar ${dark ? "is-dark" : ""}`}>
       <span>{time}</span>
       <span className="status-dots" aria-hidden="true">
         <svg width="16" height="10" viewBox="0 0 16 10" fill="currentColor">

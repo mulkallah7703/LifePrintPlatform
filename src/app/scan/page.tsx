@@ -4,21 +4,30 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useState } from "react";
 import { FingerprintIcon } from "@/components/icons";
 
+function destination(next: string | null) {
+  return next === "emergency" ? "/emergency" : "/profile";
+}
+
 function ScanContent() {
   const router = useRouter();
   const params = useSearchParams();
-  const next = params.get("next") === "emergency" ? "/emergency" : "/profile";
+  const next = destination(params.get("next"));
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
     const start = Date.now();
-    const duration = 1700;
+    const duration = 1600;
     const tick = window.setInterval(() => {
       const value = Math.min(100, ((Date.now() - start) / duration) * 100);
       setProgress(value);
       if (value >= 100) {
         window.clearInterval(tick);
         router.replace(next);
+        window.setTimeout(() => {
+          if (window.location.pathname.startsWith("/scan")) {
+            window.location.assign(next);
+          }
+        }, 250);
       }
     }, 40);
     return () => window.clearInterval(tick);

@@ -19,7 +19,7 @@ export function BottomNav({ variant = "dark" }: BottomNavProps) {
   ];
 
   return (
-    <nav className="bottom-nav" aria-label="التنقل السفلي">
+    <nav dir="ltr" className="bottom-nav" aria-label="التنقل السفلي">
       {items.map((item) => {
         const active = pathname === item.href;
         const Icon = item.icon;

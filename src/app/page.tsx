@@ -1,13 +1,12 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { CircleHeartbeatIcon, CirclePersonIcon } from "@/components/icons";
+import { Ltr } from "@/components/ltr";
 import { brand } from "@/lib/patient";
 import { setAccessRole } from "@/lib/role";
 
 export default function AccessTypePage() {
-  const router = useRouter();
-
   return (
     <div className="screen bg-page">
       <div className="screen-scroll px-6">
@@ -17,17 +16,16 @@ export default function AccessTypePage() {
               {brand.nameAr}
             </h1>
             <p className="mt-3 mb-0 text-[13px] text-subtle">اختر نوع الدخول</p>
-            <p className="mt-1 mb-0 text-[11px] text-muted">Select Access Type</p>
+            <p className="mt-1 mb-0 text-[11px] text-muted">
+              <Ltr>Select Access Type</Ltr>
+            </p>
           </div>
 
           <div className="flex flex-col gap-4">
-            <button
-              type="button"
-              className="access-card"
-              onClick={() => {
-                setAccessRole("citizen");
-                router.push("/home");
-              }}
+            <Link
+              href="/home"
+              className="access-card no-underline"
+              onClick={() => setAccessRole("citizen")}
             >
               <CirclePersonIcon size={58} />
               <div className="text-center">
@@ -35,18 +33,15 @@ export default function AccessTypePage() {
                   مواطن / مريض
                 </div>
                 <div className="mt-1 text-[12px] text-muted">
-                  Patient / Citizen
+                  <Ltr>Patient / Citizen</Ltr>
                 </div>
               </div>
-            </button>
+            </Link>
 
-            <button
-              type="button"
-              className="access-card"
-              onClick={() => {
-                setAccessRole("paramedic");
-                router.push("/scan?next=emergency");
-              }}
+            <Link
+              href="/scan?next=emergency"
+              className="access-card no-underline"
+              onClick={() => setAccessRole("paramedic")}
             >
               <CircleHeartbeatIcon size={58} />
               <div className="text-center">
@@ -54,10 +49,10 @@ export default function AccessTypePage() {
                   مسعف / طاقم طبي
                 </div>
                 <div className="mt-1 text-[12px] text-muted">
-                  Paramedic / Medical Staff
+                  <Ltr>Paramedic / Medical Staff</Ltr>
                 </div>
               </div>
-            </button>
+            </Link>
           </div>
         </div>
       </div>

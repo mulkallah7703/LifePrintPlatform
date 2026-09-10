@@ -18,6 +18,7 @@ import {
   ThermometerIcon,
   WarningIcon,
 } from "@/components/icons";
+import { Ltr } from "@/components/ltr";
 import { ConfirmDialog, Sheet } from "@/components/overlays";
 import { useToast } from "@/components/toast";
 import { demoPatient } from "@/lib/patient";
@@ -47,14 +48,24 @@ export default function EmergencyPage() {
         icon={<HeartbeatIcon size={22} />}
       />
 
-      <div className="screen-scroll px-3.5 pb-28 pt-3">
+      <div className="screen-scroll px-3.5 pb-5 pt-3">
         <section className="critical-banner mb-3">
+          <button
+            type="button"
+            className="sos-chip"
+            onClick={() => toast("SOS — جاري إرسال موقع الحالة إلى 997")}
+            aria-label="SOS"
+          >
+            SOS
+          </button>
           <div className="mb-2 flex items-center justify-center gap-2 text-[15px] font-semibold">
             <span>تنبيه حرج</span>
             <WarningIcon size={18} />
           </div>
           <div className="text-[14px]">{patient.allergyAr}</div>
-          <div className="mt-1 text-[11px] text-white/80">{patient.allergyEn}</div>
+          <div className="mt-1 text-[11px] text-white/80">
+            <Ltr>{patient.allergyEn}</Ltr>
+          </div>
         </section>
 
         <section className="section-card mb-3">
@@ -78,7 +89,9 @@ export default function EmergencyPage() {
                     <Icon size={14} />
                   </div>
                   <div className="value">{vital.value}</div>
-                  <div className="unit">{vital.labelEn}</div>
+                  <div className="unit">
+                    <Ltr>{vital.labelEn}</Ltr>
+                  </div>
                 </div>
               );
             })}
@@ -99,7 +112,7 @@ export default function EmergencyPage() {
             {patient.aiAnalysis.diagnosisAr}
           </p>
           <p className="mt-1 mb-3 text-[11px] text-muted">
-            {patient.aiAnalysis.diagnosisEn}
+            <Ltr>{patient.aiAnalysis.diagnosisEn}</Ltr>
           </p>
           <ul className="m-0 list-none p-0 text-[13px] leading-7 text-navy-ink">
             {patient.aiAnalysis.stepsAr.map((step) => (
@@ -123,7 +136,7 @@ export default function EmergencyPage() {
             <span className="flex items-center gap-1 text-subtle">
               فصيلة الدم
             </span>
-            <span className="text-[20px] font-semibold text-blood">
+            <span className="text-[20px] font-semibold text-blood ltr">
               {patient.bloodType}
             </span>
           </div>
@@ -199,15 +212,6 @@ export default function EmergencyPage() {
           </button>
         </div>
       </div>
-
-      <button
-        type="button"
-        className="sos-fab"
-        onClick={() => toast("SOS — جاري إرسال موقع الحالة إلى 997")}
-        aria-label="SOS"
-      >
-        SOS
-      </button>
 
       <ConfirmDialog
         open={ambulanceOpen}

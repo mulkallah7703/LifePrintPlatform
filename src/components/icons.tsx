@@ -21,12 +21,10 @@ function Svg({ size = 24, children, ...props }: IconProps) {
 export function PersonIcon(props: IconProps) {
   return (
     <Svg {...props}>
-      <circle cx="12" cy="8" r="3.2" fill="currentColor" />
+      <circle cx="12" cy="7.6" r="3.5" fill="currentColor" />
       <path
-        d="M5.2 19.2c.6-3.4 3.4-5.2 6.8-5.2s6.2 1.8 6.8 5.2"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
+        d="M5.1 19.6c.35-4.05 2.95-6.15 6.9-6.15s6.55 2.1 6.9 6.15"
+        fill="currentColor"
       />
     </Svg>
   );
@@ -36,9 +34,9 @@ export function HeartbeatIcon(props: IconProps) {
   return (
     <Svg {...props}>
       <path
-        d="M3 12h3.2l1.8-4.2 2.8 8.4 2.2-4.2H21"
+        d="M2.8 12.2h3.1l1.7-4.6 2.9 9.2 2.4-4.6H21.2"
         stroke="currentColor"
-        strokeWidth="1.8"
+        strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />

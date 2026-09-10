@@ -285,6 +285,11 @@ a {
   transform: scale(0.985);
 }
 
+.ltr {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
 .blood-type {
   text-align: center;
   color: var(--color-blood);
@@ -292,6 +297,8 @@ a {
   font-weight: 600;
   letter-spacing: 0.04em;
   padding: 10px 0 6px;
+  direction: ltr;
+  unicode-bidi: isolate;
 }
 
 .critical-banner {
@@ -300,6 +307,7 @@ a {
   border-radius: 16px;
   padding: 16px 16px 14px;
   text-align: center;
+  position: relative;
 }
 
 .vital-grid {
@@ -328,6 +336,8 @@ a {
   color: var(--color-navy-ink);
   margin-top: 8px;
   letter-spacing: -0.03em;
+  direction: ltr;
+  unicode-bidi: isolate;
 }
 
 .vital-cell .unit {
@@ -356,22 +366,20 @@ a {
   border-top: 0;
 }
 
-.sos-fab {
+.sos-chip {
   position: absolute;
-  left: 18px;
-  bottom: 148px;
-  width: 56px;
-  height: 56px;
-  border-radius: 999px;
+  left: 12px;
+  top: 12px;
   border: 0;
-  background: var(--color-critical);
+  background: rgba(0, 0, 0, 0.2);
   color: #fff;
-  box-shadow: 0 10px 24px rgba(224, 58, 58, 0.35);
+  border-radius: 999px;
+  min-width: 44px;
+  height: 28px;
   font-weight: 800;
-  font-size: 13px;
-  letter-spacing: 0.04em;
+  font-size: 11px;
+  letter-spacing: 0.06em;
   cursor: pointer;
-  z-index: 4;
 }
 
 .bottom-nav {
