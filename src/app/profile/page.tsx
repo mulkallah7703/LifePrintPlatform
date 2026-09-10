@@ -141,7 +141,8 @@ export default function ProfilePage() {
                   {contact.nameAr}
                 </div>
                 <div className="mt-1 text-[11px] text-muted">
-                  {contact.relationAr} / {contact.relationEn} — {contact.phone}
+                  {contact.relationAr} / <Ltr>{contact.relationEn}</Ltr> —{" "}
+                  <Ltr>{contact.phone}</Ltr>
                 </div>
               </div>
               <PhoneIcon size={18} className="text-navy" />
