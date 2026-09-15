@@ -14,12 +14,11 @@ import {
   PhoneIcon,
   RefreshIcon,
   SendIcon,
-  SirenIcon,
   ThermometerIcon,
   WarningIcon,
 } from "@/components/icons";
 import { Ltr } from "@/components/ltr";
-import { ConfirmDialog, Sheet } from "@/components/overlays";
+import { Sheet } from "@/components/overlays";
 import { useToast } from "@/components/toast";
 import { demoPatient } from "@/lib/patient";
 
@@ -35,7 +34,7 @@ export default function EmergencyPage() {
   const patient = demoPatient;
   const [notesOpen, setNotesOpen] = useState(false);
   const [protocolOpen, setProtocolOpen] = useState(false);
-  const [ambulanceOpen, setAmbulanceOpen] = useState(false);
+  const [contactsOpen, setContactsOpen] = useState(false);
   const [notes, setNotes] = useState("");
   const [updatedLabel, setUpdatedLabel] = useState(patient.vitalsUpdatedAr);
 
@@ -154,24 +153,14 @@ export default function EmergencyPage() {
           </div>
         </section>
 
-        <div className="mb-2 grid grid-cols-2 gap-2">
-          <button
-            type="button"
-            className="navy-btn"
-            onClick={() => toast("جاري الاتصال بالطوارئ — 997")}
-          >
-            <span>اتصال طوارئ</span>
-            <PhoneIcon size={18} />
-          </button>
-          <button
-            type="button"
-            className="red-btn"
-            onClick={() => setAmbulanceOpen(true)}
-          >
-            <span>طلب إسعاف</span>
-            <SirenIcon size={18} />
-          </button>
-        </div>
+        <button
+          type="button"
+          className="navy-btn mb-2"
+          onClick={() => setContactsOpen(true)}
+        >
+          <span>جهة الاتصال</span>
+          <PhoneIcon size={18} />
+        </button>
 
         <button
           type="button"
@@ -213,15 +202,37 @@ export default function EmergencyPage() {
         </div>
       </div>
 
-      <ConfirmDialog
-        open={ambulanceOpen}
-        onClose={() => setAmbulanceOpen(false)}
-        title="طلب إسعاف"
-        body="إرسال طلب إسعاف فوري لهذا الموقع؟ هذا نموذج تجريبي ولن يُرسل بلاغاً حقيقياً."
-        confirmLabel="إرسال الطلب"
-        danger
-        onConfirm={() => toast("تم إرسال طلب الإسعاف")}
-      />
+      <Sheet
+        open={contactsOpen}
+        onClose={() => setContactsOpen(false)}
+        title="جهات الاتصال للطوارئ"
+        subtitle="Emergency Contacts"
+      >
+        <div className="flex flex-col gap-2">
+          {patient.emergencyContacts.map((contact) => (
+            <button
+              key={contact.id}
+              type="button"
+              className="flex items-center justify-between rounded-2xl bg-row px-4 py-3 text-start"
+              onClick={() => {
+                toast(`جاري الاتصال بـ ${contact.nameAr}`);
+                setContactsOpen(false);
+              }}
+            >
+              <div>
+                <div className="text-[14px] font-medium text-navy-ink">
+                  {contact.nameAr}
+                </div>
+                <div className="mt-1 text-[11px] text-muted">
+                  {contact.relationAr} / <Ltr>{contact.relationEn}</Ltr> —{" "}
+                  <Ltr>{contact.phone}</Ltr>
+                </div>
+              </div>
+              <PhoneIcon size={18} className="text-navy" />
+            </button>
+          ))}
+        </div>
+      </Sheet>
 
       <Sheet
         open={notesOpen}
